@@ -5,7 +5,7 @@ from rest_framework import routers
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .views import Main
+from .views import Main,GetData
 router = routers.DefaultRouter()
 
 schema_view = get_schema_view(
@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('api/', include(('sample_swagger.urls', 'api'))),
     path('',Main.as_view()),
+    path('crawl/',GetData.as_view()),
+    # path('time/',GetTime.as_view()),
 ]
 
 if settings.DEBUG:
