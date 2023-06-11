@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 
@@ -110,8 +111,11 @@ class GetData(APIView):
             'kosdaq_list1': kosdaq_list1,
             'kosdaq_list2': kosdaq_list2,
             'kosdaq_list3': kosdaq_list3
-        }
-        return Response(data)
+        }  
+        
+        
+        return Response(data,status=200)
+        # return Response(data)
         # if news_title:
         #     print(news_title)
         #     return Response(status=200)
