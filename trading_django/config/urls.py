@@ -27,6 +27,9 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('api/', include(('sample_swagger.urls', 'api'))),
     path('',Main.as_view()),
+    # user app
+    path('user/',include('user.urls')),
+    # 스크래핑
     path('crawl/',GetData.as_view()),
     # path('time/',GetTime.as_view()),
 ]
