@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-lg" style="margin-top: 3%; ">
+    <div style="text-align: center; display: flex; justify-content: center; flex-direction: column;">
+        <h3>회원 가입 신청화면</h3>
+        <!-- 이메일-->
+        <div class="form-floating mb-3" style="display: flex;">
+            <input type="email" class="form-control" style="font-size:14px; height:5%; width:70%; margin-right: 30px;"
+                id="input_email" placeholder="name@example.com">
+            <label for="input_email" style="font-size: 14px; padding:4px 10px">Email address</label>
+            <button type="button" id="duplicate_check_button" class="btn btn-primary btn-sm" style="height:50px">중복
+                검사</button>
+        </div>
+        <!-- 비밀번호, 비밀번호 확인-->
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" style="font-size:14px; height:5%; width:70% "
+                id="input_password1" placeholder="********">
+            <label for="input_password1" style="font-size: 14px; padding:4px 10px">비밀번호</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" style="font-size:14px; height:5%; width:70% "
+                id="input_password2" placeholder="********">
+            <label for="input_password2" style="font-size: 14px; padding:4px 10px">비밀번호 확인</label>
+        </div>
+        <!-- 이름-->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" style="font-size:14px; height:5%; width:70% " id="input_name"
+                placeholder="홍길동">
+            <label for="input_name" style="font-size: 14px; padding:4px 10px">이름</label>
+        </div>
+        <!-- 신청하기-->
+        <button type="button" id="join_button" class="btn btn-primary" style="width:10%">신청하기</button>
+    </div>
+</div>
+{% endblock %}

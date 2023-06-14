@@ -6,6 +6,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from .views import Main,GetData
+from django.conf.urls.static import static
 router = routers.DefaultRouter()
 
 schema_view = get_schema_view(
@@ -32,7 +33,7 @@ urlpatterns = [
     # 스크래핑
     path('crawl/',GetData.as_view()),
     # path('time/',GetTime.as_view()),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += [

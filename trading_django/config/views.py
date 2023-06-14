@@ -15,12 +15,12 @@ from datetime import datetime
 class Main(APIView):
     def get(self,request):
         # 로고 주소
-        logo_url = "static/img/logo.PNG"
-        crs1 = "static/img/finbiz.PNG"
-        crs2 = "static/img/hangyoung.PNG"
-        crs3 = "static/img/tradingview.PNG"
+        # logo_url = "static/img/logo.PNG"
+        # crs1 = "static/img/finbiz.PNG"
+        # crs2 = "static/img/hangyoung.PNG"
+        # crs3 = "static/img/tradingview.PNG"
         time = datetime.now
-        context = {'logo_url':logo_url,'crs1':crs1,'crs2':crs2,'crs3':crs3,'time':time}
+        context = {'time':time}
         
         return render(request, 'index.html',context)
     
