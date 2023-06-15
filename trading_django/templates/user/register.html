@@ -30,7 +30,90 @@
             <label for="input_name" style="font-size: 14px; padding:4px 10px">이름</label>
         </div>
         <!-- 신청하기-->
-        <button type="button" id="join_button" class="btn btn-primary" style="width:10%">신청하기</button>
+        <button type="button" id="register_button" class="btn btn-primary" style="width:10%">신청하기</button>
     </div>
 </div>
+
+<script>
+    let email_check = 0
+    document.getElementById('duplicate_check_button').addEventListener('click', function () {
+        let email = document.getElementById('input_email').value;
+        console.log("눌러지;나")
+
+        // 이메일 중복 검사를 수행하는 fetch 요청
+        fetch('/user/check_email_duplicate/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email
+            })
+
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Network response was not ok')
+            }
+        }).then(function (data) {
+            console.log(data)
+            if (data.email_exists) {
+                alert('이미 사용 중인 이메일입니다.');
+            } else {
+                alert('사용 가능한 이메일입니다.')
+                email_check = 1
+            }
+        }).catch(function (error) {
+            console.log('에러:', error);
+        });
+    })
+
+
+    document.getElementById('register_button').addEventListener('click', function () {
+        let email = document.getElementById('input_email').value;
+        let password1 = document.getElementById('input_password1').value;
+        let password2 = document.getElementById('input_password2').value;
+        let name = document.getElementById('input_name').value;
+
+
+        if (email_check == 0) {
+            alert('이메일 중복확인을 해주세요')
+        }
+        fetch("/user/register/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password1: password1,
+                    password2: password2,
+                    name: name,
+                })
+            }).then(function (response) {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(function (data) {
+                if (data.password_error_message) {
+                    alert(data.password_error_message)
+                }
+            })
+            .catch(function (error) {
+                console.log("error");
+            })
+            .finally(function () {
+                console.log("완료");
+                location.replace('/')
+
+
+            });
+    })
+</script>
+
 {% endblock %}

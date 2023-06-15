@@ -21,3 +21,6 @@
 - 여기에 잘 나와 있지만 쉽게 말해 User-agent에 대한 지침을 적어놓은 곳이다
 - 많은 곳들이 User-Agent: \* 이 Disallow 되어 있지만 운이 좋게도 팍스넷에서 스크래핑하기도 쉬웠고 모든 user-agent에게
 - allow 되어있어서 팍스넷에서 스크래핑을 했다. 스크래핑하는 라이브러리는 bs4 (BeautifulSoup)를 사용함
+
+- 다른페이지에서 static을 못읽는 현상발생
+- 'base.html' 에 {% load static %} 추가
