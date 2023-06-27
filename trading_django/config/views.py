@@ -11,6 +11,10 @@ from bs4 import BeautifulSoup
 
 from datetime import datetime
 
+from user.models import User
+
+
+
 # Create your views here.
 class Main(APIView):
     def get(self,request):
@@ -20,9 +24,19 @@ class Main(APIView):
         # crs2 = "static/img/hangyoung.PNG"
         # crs3 = "static/img/tradingview.PNG"
         time = datetime.now
-        context = {'time':time}
+        email = request.session.get('email')
+        user = User.objects.filter(email=email).first()
+
+        if not user:
+            context = {'time':time}
+            return render(request, 'index.html',context)
         
-        return render(request, 'index.html',context)
+        else: # 유저가 있는 경우
+            context = {'time':time,'user':user}
+            return render(request, 'index.html',context)
+        
+        
+        
     
 class GetData(APIView):
     def get(self,request):

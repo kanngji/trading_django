@@ -11,6 +11,25 @@ class Main(APIView):
     def get(self,request):
         return HttpResponse("야야야")
     
+class Login(APIView):
+    def get(self,request):
+        return render(request, 'user/login.html')
+    
+    def post(self,request):
+        email = request.data.get('email',None)
+        password = request.data.get('password',None)
+
+        user = User.objects.filter(email=email).first()
+
+        if user is None:
+            return JsonResponse({"message":"잘못된 회원정보입니다."})
+
+        if user.password == password:
+            request.session['email'] = email
+            return HttpResponse(status=200)
+        else:
+            return JsonResponse({"message":"잘못된 회원정보입니다."})
+          
 class Register(APIView):
     def get(self,request):    
         return render(request,'user/register.html')

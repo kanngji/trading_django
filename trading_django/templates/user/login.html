@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-lg" style="margin-top: 3%; ">
+    <div style="text-align: center; display: flex; justify-content: center; flex-direction: column;">
+        <h3>로그인</h3>
+        <!-- 이메일-->
+        <div class="form-floating mb-3" style="display: flex;">
+            <input type="email" class="form-control" style="font-size:14px; height:5%; width:70%; margin-right: 30px;"
+                id="input_email" placeholder="name@example.com">
+            <label for="input_email" style="font-size: 14px; padding:4px 10px">Email address</label>
+
+        </div>
+        <!-- 비밀번호, 비밀번호 확인-->
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" style="font-size:14px; height:5%; width:70% "
+                id="input_password" placeholder="********">
+            <label for="input_password" style="font-size: 14px; padding:4px 10px">비밀번호</label>
+        </div>
+
+
+        <!-- 신청하기-->
+        <button type="button" id="login_button" class="btn btn-primary" style="width:10%">로그인</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('login_button').addEventListener('click', function () {
+        let email = document.getElementById('input_email').value;
+        let password = document.getElementById('input_password').value;
+        fetch("/user/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+
+                    name: name,
+                })
+            }).then(function (response) {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(function (data) {
+                if (data.message) {
+                    alert(data.message)
+                }
+            })
+            .catch(function (error) {
+                console.log("error");
+            })
+            .finally(function () {
+                console.log("완료");
+                location.replace('/')
+
+
+            });
+    })
+</script>
+
+{% endblock %}
